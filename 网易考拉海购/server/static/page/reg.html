@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+<div id='reg'>
+        <h1>注册</h1>
+        用户名:<input type="text" id="us"><br>
+        密码：<input type="password" id="ps"><br>
+        <button onclick="reg()">注册</button>
+</div>
+<script>
+        var rootPath='http://localhost:3000';
+        function reg(){
+            if($('input').val()=="") return;
+            var data={
+                user:$("#us").val(),
+                pass:$('#ps').val(),
+            }
+            $.post(rootPath+'/router/reg',data,function(res){
+                if(res.err==0){
+                    window.location.href='login.html';
+                }else{
+                    alert('用户名存在，注册失败');
+                    $('input').val()==""; 
+                }
+            })
+        }
+    </script>
+</body>
+</html>
